@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>YouTube 表示ツール（設定付き）</title>
+        <!-- CSSファイルを読み込む -->
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <!-- ツールバー -->
+        <div class="toolbar">
+            <!-- 左側コンテナ（表示数 + 変更ボタン + リセットボタン） -->
+            <div class="toolbar-left">
+                <label for="table-size">表示数:</label>
+                <select id="table-size">
+                    <option value="1">1</option>
+                    <option value="4">4</option>
+                    <option value="9">9</option>
+                    <option value="16">16</option>
+                    <option value="25">25</option>
+                </select>
+                <button id="change-table-btn">変更</button>
+                <button id="reset-btn">リセット</button>
+            </div>
+
+            <!-- 右側コンテナ（音量スライダー + 設定ボタン） -->
+            <div class="toolbar-right">
+                <label for="global-volume">音量:</label>
+                <input type="range" id="global-volume" min="0" max="100" value="15">
+                <button id="settings-btn">設定</button>
+            </div>
+        </div>
+
+        <!-- 中央寄せするためのラッパ -->
+        <div class="content-wrapper">
+            <!-- 動的にテーブルを生成するコンテナ -->
+            <div class="table-container" id="table-container"></div>
+        </div>
+
+        <!-- 設定モーダル(初期は非表示) -->
+        <div id="settings-modal" class="modal-overlay">
+            <div class="modal-content">
+                <h2>設定</h2>
+                <div class="form-row">
+                    <label>
+                        <input type="checkbox" id="keep-playback-info" />
+                        リフレッシュ時に前回の再生情報を残す
+                    </label>
+                </div>
+                <div class="form-row">
+                    <label for="default-table-size">初期表示数:</label>
+                    <select id="default-table-size">
+                        <option value="1">1</option>
+                        <option value="4">4</option>
+                        <option value="9">9</option>
+                        <option value="16">16</option>
+                        <option value="25">25</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label>
+                        <input type="checkbox" id="autoplay-on-refresh" />
+                        リフレッシュ時に自動再生する
+                    </label>
+                </div>
+                <div class="form-row">
+                    <label>
+                        <input type="checkbox" id="autoplay-on-add" />
+                        動画URL登録時に自動再生する
+                    </label>
+                </div>
+                <div class="button-row">
+                    <button id="save-settings-btn">保存</button>
+                    <button id="close-settings-btn">閉じる</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- YouTube IFrame Player API 読み込み (音量制御、自動再生制御に必要) -->
+        <script src="https://www.youtube.com/iframe_api"></script>
+        <!-- 分割したJavaScriptを読み込む -->
+        <script src="main.js"></script>
+    </body>
+</html>
