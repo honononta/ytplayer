@@ -91,36 +91,74 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(apiKeyGuideModal);
 
     apiKeyGuideBtn.addEventListener('click', () => {
-        // APIキーガイドの内容を取得
-        fetchAPIKeyGuide();
-    });
+        // 直接ガイドの内容をモーダルに設定
+        apiKeyGuideModal.innerHTML = `
+            <div id="api-key-guide-content">
+                <button id="close-api-key-guide-btn">✕</button>
+                <div class="api-key-guide-container">
+                    <h1>YouTubeライブコメント取得用 APIキーの取得方法</h1>
 
-    function fetchAPIKeyGuide() {
-        fetch('api-key-guide')
-            .then(response => response.text())
-            .then(html => {
-                // モーダルの内容を設定
-                apiKeyGuideModal.innerHTML = `
-                    <div id="api-key-guide-content">
-                        <button id="close-api-key-guide-btn">×</button>
-                        ${html}
+                    <div class="warning">
+                        <strong>注意:</strong> このAPIキーは無料で取得できますが、使用には制限があります。過度な使用は追加費用が発生する可能性があります。
                     </div>
-                `;
 
-                // クローズボタンのイベントリスナーを追加
-                const closeBtn = document.getElementById('close-api-key-guide-btn');
-                closeBtn.addEventListener('click', () => {
-                    apiKeyGuideModal.style.display = 'none';
-                });
+                    <h2>手順1: Google Cloud Platformにログイン</h2>
+                    <ol>
+                        <li><a href="https://console.cloud.google.com/" target="_blank">Google Cloud Platform</a>にアクセスします。</li>
+                        <li>Googleアカウントでログインします。</li>
+                    </ol>
 
-                // モーダルを表示
-                apiKeyGuideModal.style.display = 'flex';
-            })
-            .catch(error => {
-                console.error('APIキーガイドの読み込みエラー:', error);
-                alert('ガイドの読み込みに失敗しました。');
-            });
-    }
+                    <h2>手順2: 新しいプロジェクトを作成</h2>
+                    <ol>
+                        <li>画面上部のプロジェクト選択メニューをクリックします。</li>
+                        <li>「新しいプロジェクト」をクリックします。</li>
+                        <li>プロジェクト名を入力し、「作成」をクリックします。</li>
+                    </ol>
+
+                    <h2>手順3: YouTube Data APIを有効化</h2>
+                    <ol>
+                        <li>左側のメニューから「APIとサービス」>「ライブラリ」を選択します。</li>
+                        <li>検索バーで「YouTube Data API v3」を検索します。</li>
+                        <li>「YouTube Data API v3」をクリックし、「有効にする」をクリックします。</li>
+                    </ol>
+
+                    <h2>手順4: 認証情報を作成</h2>
+                    <ol>
+                        <li>「APIとサービス」>「認証情報」に移動します。</li>
+                        <li>「認証情報を作成」>「APIキー」をクリックします。</li>
+                        <li>自動的に新しいAPIキーが生成されます。</li>
+                        <li>キーの横にある「コピー」ボタンをクリックし、アプリケーションに貼り付けます。</li>
+                    </ol>
+
+                    <h2>手順5: APIキーの制限（推奨）</h2>
+                    <ol>
+                        <li>作成したAPIキーの横にある「編集」をクリックします。</li>
+                        <li>「アプリケーションの制限」で「HTTPリファラー (ウェブサイト)」を選択します。</li>
+                        <li>「ウェブサイト」に、アプリケーションのURLを追加します。</li>
+                        <li>「API制限」で「YouTube Data API v3」を選択します。</li>
+                    </ol>
+
+                    <div class="warning">
+                        <strong>重要な注意点:</strong>
+                        <ul>
+                            <li>APIキーは秘密にしてください。</li>
+                            <li>不正利用を防ぐため、適切な制限を設定してください。</li>
+                            <li>使用状況を定期的に確認し、必要に応じてキーをリセットしてください。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // クローズボタンのイベントリスナーを追加
+        const closeBtn = document.getElementById('close-api-key-guide-btn');
+        closeBtn.addEventListener('click', () => {
+            apiKeyGuideModal.style.display = 'none';
+        });
+
+        // モーダルを表示
+        apiKeyGuideModal.style.display = 'flex';
+    });
 });
 
 /**
@@ -287,7 +325,7 @@ function createPlayer(cellNumber, videoId, isRefresh = true) {
 
         const closeButton = document.createElement('button');
         closeButton.className = 'close-button';
-        closeButton.textContent = '×';
+        closeButton.textContent = '✕';
         closeButton.onclick = () => removeYouTubeVideo(cellNumber);
         cell.appendChild(closeButton);
 
