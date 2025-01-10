@@ -6,6 +6,7 @@
         <title>YouTube 表示ツール（設定付き）</title>
         <!-- CSSファイルを読み込む -->
         <link rel="stylesheet" href="style.css">
+        <link rel="icon" href="data:,">
     </head>
     <body>
         <!-- ツールバー -->
@@ -42,34 +43,74 @@
         <div id="settings-modal" class="modal-overlay">
             <div class="modal-content">
                 <h2>設定</h2>
-                <div class="form-row">
-                    <label>
-                        <input type="checkbox" id="keep-playback-info" />
-                        リフレッシュ時に前回の再生情報を残す
-                    </label>
+                
+                <!-- 基本設定 -->
+                <div class="settings-section">
+                    <h3>基本設定</h3>
+                    <div class="form-row">
+                        <label>
+                            <input type="checkbox" id="keep-playback-info" />
+                            リフレッシュ時に前回の再生情報を残す
+                        </label>
+                    </div>
+                    <div class="form-row">
+                        <label for="default-table-size">初期表示数:</label>
+                        <select id="default-table-size">
+                            <option value="1">1</option>
+                            <option value="4">4</option>
+                            <option value="9">9</option>
+                            <option value="16">16</option>
+                            <option value="25">25</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="form-row">
-                    <label for="default-table-size">初期表示数:</label>
-                    <select id="default-table-size">
-                        <option value="1">1</option>
-                        <option value="4">4</option>
-                        <option value="9">9</option>
-                        <option value="16">16</option>
-                        <option value="25">25</option>
-                    </select>
+
+                <!-- 再生設定 -->
+                <div class="settings-section">
+                    <h3>再生設定</h3>
+                    <div class="form-row">
+                        <label>
+                            <input type="checkbox" id="autoplay-on-refresh" />
+                            リフレッシュ時に自動再生する
+                        </label>
+                    </div>
+                    <div class="form-row">
+                        <label>
+                            <input type="checkbox" id="autoplay-on-add" />
+                            動画URL登録時に自動再生する
+                        </label>
+                    </div>
+                    <div class="form-row">
+                        <label>
+                            <input type="checkbox" id="enable-video-loop" />
+                            動画をループ再生する
+                        </label>
+                    </div>
+                    <div class="form-row">
+                        <label>
+                            <input type="checkbox" id="mute-on-start" />
+                            再生開始時にミュートにする
+                        </label>
+                    </div>
+                    <div class="form-row">
+                        <label for="default-volume">初期音量:</label>
+                        <input type="range" id="default-volume" min="0" max="100" value="15">
+                        <span id="volume-value">15</span>
+                    </div>
+                    <div class="form-row">
+                        <label for="api-key">YouTube API Key:</label>
+                        <input type="text" id="api-key" placeholder="APIキーを入力">
+                        <button id="api-key-guide-btn">取得方法</button>
+                    </div>
+                    <div class="form-row">
+                        <label>
+                            <input type="checkbox" id="enable-comments" />
+                            ライブコメントを表示する
+                        </label>
+                    </div>
                 </div>
-                <div class="form-row">
-                    <label>
-                        <input type="checkbox" id="autoplay-on-refresh" />
-                        リフレッシュ時に自動再生する
-                    </label>
-                </div>
-                <div class="form-row">
-                    <label>
-                        <input type="checkbox" id="autoplay-on-add" />
-                        動画URL登録時に自動再生する
-                    </label>
-                </div>
+
+
                 <div class="button-row">
                     <button id="save-settings-btn">保存</button>
                     <button id="close-settings-btn">閉じる</button>
