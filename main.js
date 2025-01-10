@@ -637,7 +637,7 @@ async function startChatPolling(videoId, cellNumber, apiKey) {
             } catch (error) {
                 console.error('Error fetching chat messages:', error);
             }
-        }, 3000);  // チェック間隔を少し延ばす
+        }, 6000);  // チェック間隔を少し延ばす
 
     } catch (error) {
         console.error('Error starting chat polling:', error);
