@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function fetchAPIKeyGuide() {
-        fetch('api-key-guide.html')
+        fetch('api-key-guide')
             .then(response => response.text())
             .then(html => {
                 // モーダルの内容を設定
